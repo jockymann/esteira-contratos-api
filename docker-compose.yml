@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: esteira_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # Sobrescreve a string de conexão para apontar para o container do banco de dados (db)
+      - ConnectionStrings__DefaultConnection=Host=db;Database=esteira_db;Username=admin;Password=adminpassword
+      # Força a API do .NET 8 a escutar na porta 8080
+      - ASPNETCORE_HTTP_PORTS=8080
+    depends_on:
+      - db
+
+volumes:
+  # Garante que os dados do banco não sejam perdidos ao desligar o container
+  postgres_data:

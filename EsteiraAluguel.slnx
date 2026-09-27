@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EsteiraAluguel.Api/EsteiraAluguel.Api.csproj" />
+  <Project Path="EsteiraAluguel.Application/EsteiraAluguel.Application.csproj" />
+  <Project Path="EsteiraAluguel.Domain/EsteiraAluguel.Domain.csproj" />
+  <Project Path="EsteiraAluguel.Infrastructure/EsteiraAluguel.Infrastructure.csproj" />
+</Solution>
